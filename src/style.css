@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: hsl(155 33% 25%);
+  --color-background-darker: hsl(155, 33%, 18%);
+  --color-background-lighter: hsl(155, 100%, 75%);
+  --color-shadows: hsl(155, 33%, 10%);
+  --color-normal: hsl(53 63% 79%);
+  --color-secondary: hsl(50 48% 12%);
+  --color-primary: hsl(32 100% 46%);
+  --color-primary-lighter: hsl(32, 100%, 70%);
+  --color-primary-darker: hsl(32, 60%, 20%);
+}
+:root {
+  --transition-duration: 300ms;
+  --transition-timing-function: ease;
+}
+
+* {
+  @apply text-shadow-xs text-shadow-shadows;
+}
+
+svg {
+  @apply drop-shadow-xs drop-shadow-shadows;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  @apply bg-background-darker text-background-lighter;
+}
+#app {
+  @apply min-h-dvh bg-background-darker;
+}
+button:disabled {
+  @apply pointer-events-none;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  transition-property: background color border;
+}
+button:not(:disabled) {
+  @apply cursor-pointer;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  transition-property: background color border;
+}
+.item-add-btn {
+  @apply text-start px-3 py-1
+  border border-background-lighter/60
+  text-background-lighter/60
+  rounded-sm border-dashed;
+}
+.item-add-btn:hover {
+  @apply border-background-lighter text-background-lighter;
+}
+.btn.one-click[data-active="true"] {
+  @apply border-primary text-primary bg-primary-darker pointer-events-none;
+}
+.btn:not(.no-decor) {
+  @apply py-2 border-background-lighter border rounded-full;
+}
+.btn:hover {
+  @apply border-primary text-primary bg-primary-darker;
+}
+.btn:disabled {
+  @apply border-background-darker text-background-darker bg-background-darker/40;
+}
+.custom-select {
+  @apply outline-none border border-background-lighter rounded-md px-3 py-3;
+}
+.custom-select button {
+  @apply border-none outline-none
+  flex flex-row items-center justify-between gap-2
+  cursor-pointer w-full text-start;
+}
+.custom-select svg {
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  transition-property: transform;
+}
+.custom-select[data-open="true"] svg {
+  transform: rotate(180deg);
+}
+.custom-select .item-container {
+  @apply overflow-clip bg-background-darker rounded-md border-background-lighter;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  transition-property: max-height margin;
+}
+.custom-select .item-container button {
+  @apply py-3 px-2;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  transition-property: background;
+}
+.custom-select .item-container button:hover {
+  @apply bg-background;
+}
+.custom-select .item-container button:disabled {
+  @apply bg-background cursor-default;
+}
+.custom-select[data-open="false"] .item-container {
+  @apply max-h-0;
+}
+.custom-select[data-open="true"] .item-container {
+  @apply max-h-dvh mt-2 border;
+}
+.card {
+  @apply drop-shadow-xs drop-shadow-shadows bg-background
+  border-background-lighter border
+  px-5 py-3 rounded-md;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  transition-property: color border background;
+}
+.card-title {
+  @apply p-3 border-b border-background-lighter flex flex-row justify-between items-center gap-5;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  transition-property: color border background;
+}
+.modal {
+  @apply fixed top-0 p-5
+  flex flex-col items-center justify-center
+  min-h-dvh w-full backdrop-blur-xs bg-background-darker/5;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  transition-property: opacity;
+}
+button.items {
+  @apply flex flex-row justify-between items-center py-3 px-3 bg-background-darker;
+}
+button.items:hover {
+  @apply bg-background;
+}
+input[type="text"],
+input[type="number"] {
+  @apply outline-none border border-background-lighter px-3 py-3 rounded-sm bg-background-darker;
+}
+.selected-item {
+  @apply flex flex-row justify-between overflow-clip
+  border border-background-lighter rounded-md;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  transition-property: color border;
+}
+.no-spinner {
+  -moz-appearance: textfield;
+}
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.card.instance {
+  @apply flex overflow-clip w-full lg:w-96 flex-col p-0!;
+}
+.card.instance:has(.remove-btn:hover),
+.card.instance:has(.remove-btn:hover) .selected-item,
+.card.instance:has(.remove-btn:hover) .resupply-btn,
+.card.instance:has(.remove-btn:hover) .content-wrapper,
+.card.instance:has(.remove-btn:hover) .card-title {
+  @apply border-rose-300! text-rose-300! bg-rose-950/40!;
+}
+.card.instance:has(.edit-btn:hover),
+.card.instance:has(.edit-btn:hover) .selected-item,
+.card.instance:has(.edit-btn:hover) .resupply-btn,
+.card.instance:has(.edit-btn:hover) .card-title {
+  @apply border-primary-lighter! text-primary-lighter! bg-primary-darker!;
+}
+.card.instance .resupply-btn {
+  @apply border-t border-background-lighter p-3 hover:bg-primary-darker hover:text-primary-lighter;
+}
+.card.instance .content-wrapper {
+  @apply flex flex-col grow gap-3 p-3;
+}
